@@ -15,7 +15,7 @@ export default function WelcomeScreen() {
   }, []);
 
   return (
-    <ImageBackground source={require("@/assets/images/welcome-bg.jpg")} style={styles.background}>
+    <ImageBackground source={require("@/assets/images/welcome_bg.png")} style={styles.background}>
       <View style={styles.overlay} />
 
       {/* Logo */}
@@ -31,7 +31,7 @@ export default function WelcomeScreen() {
 
       {/* Get Started Button */}
       <Animated.View style={[styles.buttonContainer, { opacity: fadeAnim }]}>
-        <TouchableOpacity style={styles.button} onPress={() => router.push("/(onboarding)/userInfo")}>
+        <TouchableOpacity style={styles.button} onPress={() => router.push("/(onboarding)/user-info")}>
           <Text style={styles.buttonText}>Get Started</Text>
         </TouchableOpacity>
       </Animated.View>

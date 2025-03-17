@@ -17,7 +17,7 @@ export default function IndexScreen() {
         if (hasOnboarded) {
           router.replace("/(tabs)/home"); // ✅ Go to main app if onboarding is complete
         } else {
-          router.replace("/(onboarding)/importPeriodDates"); // ✅ Go to onboarding if it's the first time
+          router.replace("/(onboarding)/welcomePage"); // ✅ Go to onboarding if it's the first time
         }
       } else {
         router.replace("/login"); // ✅ Send to login screen
