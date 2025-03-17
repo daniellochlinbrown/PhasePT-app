@@ -1,74 +1,88 @@
-import { Image, StyleSheet, Platform } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { ImageBackground, StyleSheet, TouchableOpacity, Text, View, SafeAreaView, Platform } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import Header from '@/components/ui/Header';
 
 export default function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <SafeAreaView style={styles.safeContainer}>
+      {/* Full-Screen Background */}
+      <ImageBackground
+        source={require('@/assets/images/logo.png')}
+        style={styles.backgroundImage}
+        resizeMode="cover"
+      >
+        {/* Overlay to Ensure Text Renders Correctly */}
+        <View style={styles.overlay}>
+          {/* App Name (Testing with <Text> instead of <ThemedText>) */}
+          <Text style={styles.title}>
+            PhasePT
+          </Text>
+
+          {/* Subtitle */}
+          <Text style={styles.subtitle}>
+            Train Smarter with Your Cycle
+          </Text>
+
+          {/* Get Started Button */}
+          {/* <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate('Calendar')} 
+          >
+            <Text style={styles.buttonText}>Get Started</Text>
+          </TouchableOpacity> */}
+        </View>
+      </ImageBackground>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
+  safeContainer: {
+    flex: 1,
+    backgroundColor: 'white', // Ensures no white flash
+  },
+  backgroundImage: {
+    flex: 1,
+    justifyContent: 'center', // Ensures correct positioning
     alignItems: 'center',
-    gap: 8,
+    width: '100%',
+    height: '100%',
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  overlay: {
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center', // Center everything inside
+    paddingHorizontal: 20,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  title: {
+    fontSize: 48,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: 'black',
+    marginBottom: 10,
+    includeFontPadding: false, // Prevents text cut-off
+    textAlignVertical: 'center', // Ensures proper alignment
+  },
+  subtitle: {
+    fontSize: 20,
+    textAlign: 'center',
+    color: 'black',
+    marginBottom: 30,
+    includeFontPadding: false,
+    textAlignVertical: 'center',
+  },
+  button: {
+    backgroundColor: '#007AFF',
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 25,
+    marginTop: 20,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });
