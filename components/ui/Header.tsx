@@ -9,11 +9,11 @@ export default function Header() {
   return (
     <View style={styles.header}>
       {/* Left: Calendar Button */}
-      <TouchableOpacity onPress={() => router.push('/calendar')} style={styles.iconButton}>
+      <TouchableOpacity onPress={() => router.push('/calendar')} style={[styles.iconButton, styles.leftButton]}>
         <Ionicons name="calendar-outline" size={24} color="black" />
       </TouchableOpacity>
 
-      {/* Center: Notifications, Search, More */}
+      {/* Center: Notifications, Search, More (Shifted Right) */}
       <View style={styles.centerIcons}>
         <TouchableOpacity onPress={() => console.log('Notifications')} style={styles.iconButton}>
           <Ionicons name="notifications-outline" size={24} color="black" />
@@ -37,7 +37,6 @@ export default function Header() {
 const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
     height: 60,
@@ -46,11 +45,15 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
   },
-  iconButton: {
-    padding: 10,
+  leftButton: {
+    flex: 1, // Pushes the center icons to the right
   },
   centerIcons: {
     flexDirection: 'row',
-    gap: 15,
+    justifyContent: 'flex-end', // Moves icons to the right
+    flex: 2, // Gives this section more space
+  },
+  iconButton: {
+    padding: 10,
   },
 });
